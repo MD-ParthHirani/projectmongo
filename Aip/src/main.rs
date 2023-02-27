@@ -31,8 +31,25 @@ async fn main() {
         .and(warp::get())
         .and_then(health_checker_handler);
 
+    
+
     let routes = health_checker.with(warp::log("api"));
 
     println!(" Server started successfully");
     warp::serve(routes).run(([0, 0, 0, 0], 8000)).await;
 }
+
+/*use actix_web::{get, App, HttpResponse, HttpServer, Responder};
+
+#[get("/")]
+async fn hello() -> impl Responder {
+    HttpResponse::Ok().json("Hello from rust and mongoDB")
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| App::new().service(hello))
+        .bind(("localhost", 8080))?
+        .run()
+        .await
+}*/
